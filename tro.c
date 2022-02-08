@@ -65,23 +65,16 @@ void drawLine(int x1, int y1, int x2, int y2) {
     if (x1 >= x2)
       swapPoints(&x1, &y1, &x2, &y2);
 
-    // Conversões
-    float x_1 = (float) x1;
-    float x_2 = (float) x2;
-    float y_1 = (float) y1;
-    float y_2 = (float) y2;
-
     // Cálculos iniciais para a determinação da reta
-    float dy = y_2 - y_1; // Variação de Y
-    float dx = x_2 - x_1; // Variação de X
-    float dy_dx = dy/dx;  // Derivada de Y em função de X
-    float b = y_1 - dy_dx*x_1; // Constante B
+    int dy = y2 - y1; // Variação de Y
+    int dx = x2 - x1; // Variação de X
+    float dy_dx = (float) dy / (float) dx;  // Derivada de Y em função de X
     
     // As variações são multiplicadas por 2 porque
     // a variável de decisão é, também, multiplicada por 2 para
     // se livrar das frações
-    float dE = 2 * dy; // Variação da variável de decisão quando E é escolhido
-    float dNE = 2 * (dy - dx); // Variação da variável de decisão quando NE é escolhido
+    int dE = 2 * dy; // Variação da variável de decisão quando E é escolhido
+    int dNE = 2 * (dy - dx); // Variação da variável de decisão quando NE é escolhido
 
     // Espelhamento (eixo x = y)
     // Se a inclinação da reta for maior que 45º, calcula pela linha espelhada
@@ -97,15 +90,9 @@ void drawLine(int x1, int y1, int x2, int y2) {
       y2 = px2;
 
       // Recalcula os coeficientes da linha, agora espelhada
-      x_1 = (float) x1;
-      x_2 = (float) x2;
-      y_1 = (float) y1;
-      y_2 = (float) y2;
-
-      dy = y_2 - y_1;
-      dx = x_2 - x_1;
+      dy = y2 - y1;
+      dx = x2 - x1;
       dy_dx = dy/dx;
-      b = y_1 - dy_dx*x_1;
 
       dE = 2 * dy;
       dNE = 2 * (dy - dx);
