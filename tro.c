@@ -28,19 +28,14 @@ void init() {
 }
 
 void display(){
-  int x = 0;
-  while(1) {
-    glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f (0.0, 0.0, 0.0);
-    printf("> ");
-    int x;
-    scanf("%d", &x);
-    tracarLinha(5, 10, x, 300);
-    glColor3f (1.0, 0.0, 0.0);
-    tracarLinha2(5, 10, x, 300);
-    usleep(10000);
-    glFlush();
-  }
+  glClear(GL_COLOR_BUFFER_BIT);
+  glColor3f (0.0, 0.0, 0.0);
+
+  // Desenha uma linha do ponto (5, 10) até (400, 300)
+  tracarLinha(5, 10, 400, 300);
+
+  usleep(10000);
+  glFlush();
 }
 
 // Retorna:
@@ -64,7 +59,7 @@ void tracarLinha(int x1, int y1, int x2, int y2) {
     float dy_dx = dy/dx;  // Derivada de Y em função de X
     float b = y_1 - dy_dx*x_1; // Constante B
 
-    if (dy_dx > 1){
+    if (dy_dx > 1) {
       printf("Não é possível traçar essa linha pois seu ângulo é maior que 45º");
       return;
     }
@@ -72,7 +67,7 @@ void tracarLinha(int x1, int y1, int x2, int y2) {
     glBegin(GL_POINTS);
 
       int c_x = x1, c_y = y1; // Ponto atual
-      while(c_x != x2 && c_y != y2) {
+      while(c_x <= x2) {
         // Pintamos o ponto atual
         glVertex2i(c_x, c_y);
 
